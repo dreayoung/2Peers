@@ -1,10 +1,10 @@
 # 2Peers #
 
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > 2Peers is a web application that serves to foster a community where peers build off one anothers knowledge and improve their overall understanding of subjects.
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > 2Peers is marketed to teacher for the use of improving peer to peer learning.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
