@@ -17,7 +17,7 @@
 
 
 ## Key Technical Challenge ##
-  > What will likely be the most challenging technical hurdle you must overcome in order to complete this project?
+  > The most challenging and techincal hurdles we must overcome to successfully fufill the needs of our app is figuring out the best way to make data accessible for students and teachers.
 
 ## Extension Opportunities ##
-  > What are opportunities for you to expand the scope of this project by adding additional features to solve new but related problems?
+  > To make our app more secure and verifed, we plan on having a mandatory test that will need to be completed in order for a teacher to successfully create an account. We also plan on adding an edit profile feature for students and teachers.
