@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 const PORT = process.env.PORT || 8000;
 
@@ -9,5 +9,5 @@ app.listen(PORT, () => {
 });
 
 app.get('/api', (req, res) => {
-    res.send({ message: "Heyyyyyyyyy" });
-  });
+  res.send({ message: 'Heyyyyyyyyy' });
+});
