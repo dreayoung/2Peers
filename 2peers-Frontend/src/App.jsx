@@ -2,7 +2,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Message from './Classroom/Message';
-import Navbar from './Reusable/Navbar'
+import Navbar from './Reusable/Navbar';
 
 function App() {
   return (
