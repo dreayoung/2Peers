@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Message from './Classroom/Message';
 import Navbar from './Reusable/Navbar'
@@ -23,9 +23,8 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <Navbar/>
-      <Message/>
-      
+      <Navbar />
+      <Message />
     </div>
   );
 }
