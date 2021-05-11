@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Message from './Classroom/Message';
+import Navbar from './Reusable/Navbar'
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
           Learn React
         </a>
       </header> */}
+      <Navbar/>
       <Message/>
+      
     </div>
   );
 }
