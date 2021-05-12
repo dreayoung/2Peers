@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 // import Message from './Classroom/Message';
 // import Navbar from './Reusable/Navbar';
+import Footer from './Reusable/Footer';
 
 function App() {
   const [data, setData] = useState(null);
@@ -19,6 +20,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>{data || 'Loading...'}</p>
       </header>
+      <Footer />
     </div>
   );
 }
