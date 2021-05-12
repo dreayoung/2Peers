@@ -9,10 +9,5 @@ app.listen(PORT, () => {
 });
 
 app.get('/api', (req, res) => {
-<<<<<<< HEAD
-    res.send({ message: "Heyyyyyyyyy" });
-  });
-=======
   res.send({ message: 'Heyyyyyyyyy' });
 });
->>>>>>> main
