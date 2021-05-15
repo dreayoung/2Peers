@@ -7,12 +7,18 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+const studentRouter = require('./routes/studentRouter');
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Heyyyyyyyyy' });
 });
 
+app.use('/student', studentRouter);
+
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
 app.use('/teachers', teacherRouter);
