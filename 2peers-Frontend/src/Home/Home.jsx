@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Reusable/Navbar';
 import Banner from '../Reusable/Banner';
+import Footer from '../Reusable/Footer';
 
 const imageStyle = {
   height: '500px',
@@ -72,6 +73,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
