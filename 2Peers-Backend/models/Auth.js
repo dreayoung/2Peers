@@ -16,6 +16,17 @@ class Auth {
 
         return db.query(queryTeacher, [body.name, body.email, teacherPic, body.encryptedpassword, archived])
     }
+
+    static studentSignIn(body){
+        debugger;
+        let queryGuts = 'SELECT * FROM students WHERE email = $1 AND encryptedpassword = $2'
+        return db.query(queryGuts, [body.email, body.encryptedpassword]).then(results => results.rows[0]);
+    }
+
+    static teacherSignIn(body){
+        let queryGuts = 'SELECT * FROM teachers WHERE email = $1 AND encryptedpassword = $2'
+        return db.query(queryGuts, [body.email, body.encryptedpassword]).then(results => results.rows[0]);
+    }
 }
 
 module.exports = { Auth }
