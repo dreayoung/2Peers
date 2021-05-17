@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 function Page404() {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <>
       <Link to="/">
         <img alt="nooooo!" src="https://miro.medium.com/max/4800/1*EQisBuMOijQT8woW0Jn6pA.jpeg" />
@@ -11,6 +12,8 @@ function Page404() {
       <div>Click the image to be redirected!</div>
     </>
 =======
+=======
+>>>>>>> 7df2ff9273aff83dc919a67e9b535e6d6f7fd6d9
     <div className="bg-gray-50">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
         <img src="https://media3.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif?cid=ecf05e47rw0r5doyjeza03jlu07e1y1mbth44mu36ogllv9n&rid=giphy.gif&ct=g" alt="error gif" />
@@ -32,7 +35,10 @@ function Page404() {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 >>>>>>> feat/signup-backend
+=======
+>>>>>>> 7df2ff9273aff83dc919a67e9b535e6d6f7fd6d9
   );
 }
 
