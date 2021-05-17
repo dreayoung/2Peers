@@ -5,7 +5,6 @@ import Signup from './data/Signup';
 import Page404 from './data/Page404';
 // import Message from './Classroom/Message';
 // import Navbar from './Reusable/Navbar';
-import Footer from './Reusable/Footer';
 // import Banner from './Reusable/Banner';
 
 function App() {
