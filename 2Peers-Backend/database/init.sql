@@ -20,6 +20,7 @@ CREATE TABLE teachers (
     profilePic Text, 
     subject int, 
     encryptedPassword TEXT,
+    checkbox TEXT,
     archived BOOLEAN,
     FOREIGN KEY (subject) REFERENCES subjects(id) ON DELETE CASCADE
 );

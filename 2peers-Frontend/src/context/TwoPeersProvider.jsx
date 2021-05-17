@@ -24,6 +24,14 @@ function TwoPeersProvider({ children }) {
     });
   }
 
+  function SignIn() {
+    Axios.post('/api/signin', {
+      email: userEmail,
+      encryptedpassword: userPassword,
+      checkbox,
+    });
+  }
+
   const values = {
     data,
     setData,
@@ -36,6 +44,7 @@ function TwoPeersProvider({ children }) {
     checkbox,
     setCheck,
     SignUp,
+    SignIn,
   };
 
   return (
