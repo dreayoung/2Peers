@@ -26,7 +26,7 @@ function Login() {
               Lets get to tutoring!
             </p>
           </div>
-          <form className="mt-8 space-y-6" onSubmit={SignIn} method="POST">
+          <form className="mt-8 space-y-6" onSubmit={SignIn}>
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>

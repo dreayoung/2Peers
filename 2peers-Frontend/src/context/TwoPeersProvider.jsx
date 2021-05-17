@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+// import { Redirect } from 'react-dom';
 import Axios from 'axios';
 import TwoPeersContext from './TwoPeersContext';
 
@@ -14,9 +15,11 @@ function TwoPeersProvider({ children }) {
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
   const [checkbox, setCheck] = useState('');
+  const [valid, setValid] = useState(false);
 
-  function SignUp() {
-    Axios.post('/api/signup', {
+  function SignUp(e) {
+    e.preventDefault();
+    Axios.post('api/signup', {
       name: userName,
       email: userEmail,
       encryptedpassword: userPassword,
@@ -24,11 +27,13 @@ function TwoPeersProvider({ children }) {
     });
   }
 
-  function SignIn() {
+  function SignIn(e) {
+    e.preventDefault();
     Axios.post('/api/signin', {
       email: userEmail,
       encryptedpassword: userPassword,
       checkbox,
+      valid,
     });
   }
 
@@ -45,6 +50,8 @@ function TwoPeersProvider({ children }) {
     setCheck,
     SignUp,
     SignIn,
+    valid,
+    setValid,
   };
 
   return (

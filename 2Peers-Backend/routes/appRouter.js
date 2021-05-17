@@ -1,46 +1,72 @@
 const express = require('express');
-const { Auth } = require('../models/Auth');
-// const { Students } = require('../models/Students');
-
+const { Student } = require('../models/Student');
+const { Teacher } = require('../models/Teacher');
 const router = express.Router();
-const studentRouter = require('./studentRouter');
-const teacherRouter = require('./teacherRouter');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 router.get('/api', (req, res) => {
   res.send({ message: 'Heyyyyyyyyy' });
 });
 
-
-// // made a change to the route from /api/signup
-// router.post('/signup', (req, res) => {
-//   if (req.body.checkbox !== 'on') {
-//     debugger
-//     Auth.studentSignUp(req.body);
-//     // res.send({ message: 'student successfully signed up' });
-//     res.redirect('/login');
-//   } else {
-//     Auth.teacherSignUp(req.body);
-//     // res.send({ message: 'teacher successfully signed up' });
-//     res.redirect('/login');
-//   }
-// });
-// made a change to the route from /api/signup
-router.post('/signup', (req, res) => {
-  if (req.body.remember_me) {
-    debugger
-    Auth.teacherSignUp(req.body);
-    // res.send({ message: 'student successfully signed up' });
-    res.redirect('/login');
-  } else {
-    debugger
-    Auth.studentSignUp(req.body);
-    // res.send({ message: 'teacher successfully signed up' });
-    res.redirect('/login');
+router.post('/api/signup', async (req, res) => {
+  try {
+    if (req.body.checkbox === 'on') {
+      bcrypt.hash(req.body.encryptedpassword, 10, (err, hash) => {
+        if(err){
+          res.send({ message: 'error' });
+        }
+        else {
+            req.body.encrypt = hash;
+            Teacher.signUp(req.body);
+            res.send({ message: 'signed up as a teacher' })
+        }
+      });
+    } 
+    else {
+      bcrypt.hash(req.body.encryptedpassword, 10, (err, hash) => {
+        if(err){
+            res.send({ message: 'error' });
+        }
+        else {
+            req.body.encrypt = hash;
+            Student.signUp(req.body);
+            res.render({ message: 'signed up as a student' })
+        }
+      });
+    }
+  }
+  catch (error) {
+    res.send({ message: 'sign up total err'})
   }
 });
 
-router.use('/student', studentRouter);
-router.use('/teachers', teacherRouter);
+router.post('/api/signin', async (req, res) => {
+  debugger;
+  const { encryptedpassword } = req.body;
+  try {
+    if (req.body.checkbox === 'on') {
+      let user = await Teacher.getTeacher(req.body);
+      if(user){
+        let results = await bcrypt.compare(encryptedpassword, user.encryptedpassword);
+        if(results){
+          req.session.user = user
+          req.body.valid = true;
+        }
+      }
+    } 
+    else {
+      let user = await Student.getStudent(req.body);
+      if(user){
+        let results = await bcrypt.compare(encryptedpassword, user.encryptedpassword);
+          if(results){
+          req.session.user = user
+        }
+      }
+    }
+  }
+  catch (error) {
+    res.send({ message: 'total err'})
+  }
+});
 
 module.exports = router;
