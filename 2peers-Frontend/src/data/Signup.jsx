@@ -28,7 +28,7 @@ function Signup() {
               Lets get to tutoring!
             </p>
           </div>
-          <form className="mt-8 space-y-6" onSubmit={SignUp} method="POST">
+          <form className="mt-8 space-y-6" onSubmit={SignUp}>
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -55,7 +55,7 @@ function Signup() {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                  <input id="remember_me" name="remember_me" type="checkbox" checked={checkbox} onChange={(e) => { setCheck(e.target.value); }} className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                  <input id="remember_me" name="remember_me" type="checkbox" checked={checkbox} onChange={(e) => { e.preventDefault(); setCheck(e.target.value); }} className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
                   Are you a teacher?
                 </label>
               </div>
