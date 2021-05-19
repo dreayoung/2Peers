@@ -17,7 +17,7 @@ router.post('/api/signup', async (req, res) => {
             req.body.encrypt = hash;
             Teacher.signUp(req.body);
             res.send({ message: 'signed up as a teacher' })
-            res.redirect('/login')
+            res.redirect('/')
         }
       });
     } 
@@ -29,7 +29,7 @@ router.post('/api/signup', async (req, res) => {
         else {
             req.body.encrypt = hash;
             Student.signUp(req.body);
-            res.redirect('/login')
+            res.redirect('/')
         }
       });
     }
@@ -72,6 +72,10 @@ router.post('/api/signin', async (req, res) => {
   catch (error) {
     res.send({ message: 'total err'})
   }
+});
+
+router.get('/login', (req, res) => {
+  res.send({ passedData: userSess });
 });
 
 router.get('/api', (req, res) => {

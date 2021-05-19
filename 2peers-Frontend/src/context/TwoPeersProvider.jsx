@@ -18,7 +18,8 @@ function TwoPeersProvider({ children }) {
   const [checkbox, setCheck] = useState('');
   const [valid, setValid] = useState(false);
 
-  function SignUp() {
+  function SignUp(e) {
+    e.preventDefault();
     Axios.post('api/signup', {
       name: userName,
       email: userEmail,

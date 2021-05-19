@@ -13,13 +13,11 @@ import TwoPeersContext from './context/TwoPeersContext';
 
 function App() {
   const { data } = useContext(TwoPeersContext);
-  // const { passedData } = data;
-  // console.log('USER:', passedData);
-  console.log('USER:', data);
 
   return (
     <div className="App">
       <Switch>
+        {/* {!data.valid && <Redirect to="/login" />} */}
         <Route exact path="/">
           {data.valid ? <Redirect to={`/teachers/${data.user.id}`} /> : <Login />}
         </Route>
