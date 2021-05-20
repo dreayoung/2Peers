@@ -74,10 +74,6 @@ router.post('/signin', async (req, res) => {
   }
 });
 
-// router.get('/login', (req, res) => {
-//   res.send({ passedData: userSess });
-// });
-
 router.get('/', (req, res) => {
   res.send({ passedData: userSess });
 });

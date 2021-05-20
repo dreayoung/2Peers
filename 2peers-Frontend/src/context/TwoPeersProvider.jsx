@@ -7,9 +7,11 @@ function TwoPeersProvider({ children }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch('/').then((res) => res.json())
-      .then((fetchData) => setData(fetchData.passedData));
+    fetch('/')
+      .then((fetchData) => console.log(fetchData));
   }, []);
+
+  // console.log(data);
 
   const [userName, setName] = useState('');
   const [userEmail, setEmail] = useState('');
@@ -28,17 +30,14 @@ function TwoPeersProvider({ children }) {
     });
   }
 
-  function SignIn(e) {
-    e.preventDefault();
+  function SignIn() {
     const credentials = {
       email: userEmail,
       encryptedpassword: userPassword,
       checkbox,
       valid,
     };
-    Axios.post('/signin', credentials).then((response) => {
-      console.log(response.data);
-    });
+    Axios.post('/signin', credentials);
   }
 
   const values = {
