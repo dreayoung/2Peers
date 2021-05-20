@@ -4,13 +4,14 @@ import TwoPeersContext from './TwoPeersContext';
 
 function TwoPeersProvider({ children }) {
   const [toggleModal, displaySwitch] = useState(null);
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
     Axios.get('/api')
       .then((message) => setData(message.data));
-  });
+  }, []);
+
+  console.log(data);
 
   const [userName, setName] = useState('');
   const [userEmail, setEmail] = useState('');
