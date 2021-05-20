@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import TwoPeersContext from './TwoPeersContext';
 
@@ -7,37 +7,42 @@ function TwoPeersProvider({ children }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch('/')
-      .then((fetchData) => console.log(fetchData));
+    Axios.get('/api')
+      .then((fetchData) => setData(fetchData.data.passedData));
   }, []);
-
-  // console.log(data);
 
   const [userName, setName] = useState('');
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
   const [checkbox, setCheck] = useState('');
-  const [valid, setValid] = useState(false);
 
-  // const history = useHistory();
+  const history = useHistory();
 
-  function SignUp() {
-    Axios.post('/signup', {
+  function SignUp(e) {
+    e.preventDefault();
+    const credentials = {
       name: userName,
       email: userEmail,
       encryptedpassword: userPassword,
       checkbox,
-    });
+    };
+    Axios.post('/signup', credentials);
+    history.push('/login');
   }
 
-  function SignIn() {
+  function SignIn(e) {
+    e.preventDefault();
     const credentials = {
       email: userEmail,
       encryptedpassword: userPassword,
       checkbox,
-      valid,
     };
     Axios.post('/signin', credentials);
+    if (checkbox === 'on') {
+      history.push(`/teachers/${data.user.id}`);
+    } else {
+      history.push(`/students/${data.user.id}`);
+    }
   }
 
   const values = {
@@ -53,8 +58,6 @@ function TwoPeersProvider({ children }) {
     setCheck,
     SignUp,
     SignIn,
-    valid,
-    setValid,
   };
 
   return (

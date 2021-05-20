@@ -4,7 +4,7 @@ const { Teacher } = require('../models/Teacher');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-let userSess = {user: '', valid: ''};
+let userSess = {user: '', valid: '', role: ''};
 
 router.post('/signup', async (req, res) => {
   try {
@@ -17,7 +17,6 @@ router.post('/signup', async (req, res) => {
             req.body.encrypt = hash;
             Teacher.signUp(req.body);
             res.send({ message: 'signed up as a teacher' })
-            res.redirect('/')
         }
       });
     } 
@@ -27,9 +26,10 @@ router.post('/signup', async (req, res) => {
             res.send({ message: 'error' });
         }
         else {
+          debugger;
             req.body.encrypt = hash;
             Student.signUp(req.body);
-            res.redirect('/')
+            res.send({ message: 'signed up as a student' })
         }
       });
     }
@@ -50,8 +50,8 @@ router.post('/signin', async (req, res) => {
         if(results){
           userSess.valid = true;
           userSess.checkbox = 'on'
+          userSess.role = 'teacher'
           req.session.user = user
-          req.body.valid = true;
         }
       }
     } 
@@ -63,8 +63,8 @@ router.post('/signin', async (req, res) => {
           if(results){
           userSess.valid = true;
           userSess.checkbox = 'off'
+          userSess.role = 'student'
           req.session.user = user
-          req.body.valid = true;
         }
       }
     }
@@ -74,7 +74,7 @@ router.post('/signin', async (req, res) => {
   }
 });
 
-router.get('/', (req, res) => {
+router.get('/api', (req, res) => {
   res.send({ passedData: userSess });
 });
 

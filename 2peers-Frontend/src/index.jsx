@@ -6,10 +6,10 @@ import App from './App';
 import TwoPeersProvider from './context/TwoPeersProvider';
 
 ReactDOM.render(
-  <TwoPeersProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <TwoPeersProvider>
       <App />
-    </BrowserRouter>
-  </TwoPeersProvider>,
+    </TwoPeersProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
