@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../Reusable/Navbar';
 import Banner from '../Reusable/Banner';
 import Footer from '../Reusable/Footer';
+import Dashboard from '../Reusable/Dashboard';
 
 const imageStyle = {
   height: '500px',
@@ -12,6 +13,7 @@ export default function Home() {
     <div>
       <Navbar route="/login" link="Login" />
       <Banner />
+      <Dashboard />
       <section className="max-w-5xl px-6 py-16 mx-auto">
         <div className="">
           <div className="items-center md:flex md:space-x-6">

@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/classrooms/:id" component={Classroom} />
         <Route exact path="/" component={Home} />
         <Route exact path="/teachers/:id">
-          { data.valid && data.role === 'student' ? <Redirect to={`/students/${data.user.id}`} /> : <Login />}
+          { data.valid && data.role === 'student' ? <Redirect to={`/students/${data.user.id}`} /> : <Teacher />}
         </Route>
         <Route path="/" component={Page404} />
       </Switch>
