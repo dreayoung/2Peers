@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 8000;
 const appRouter = require('./routes/appRouter');
 const studentRouter = require('./routes/studentRouter');
 const teacherRouter = require('./routes/teacherRouter');
-const classroomRouter = require('./classroomRouter');
-const messageRouter = require('./messageRouter');
+const classroomRouter = require('./routes/classroomRouter');
+const messageRouter = require('./routes/messageRouter');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
