@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import TwoPeersContext from '../context/TwoPeersContext';
 
 function NavBar() {
-  const { data } = useContext(TwoPeersContext);
-  console.log(data.user);
+  const { data, Logout } = useContext(TwoPeersContext);
+
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -31,14 +31,13 @@ function NavBar() {
                 <Link to="/">
                   <p className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</p>
                 </Link>
-                {data.valid ? <Link to="/logout" onClick={() => { setData({}); }}><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Logout</p></Link> : <Link to="/login"><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Sign In</p></Link>}
+                {data.valid ? <button onClick={Logout} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page" type="button">Logout</button> : <Link to="/login"><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Sign In</p></Link>}
               </div>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" type="button">
               <span className="sr-only">Role</span>
-              {/* {data.valid ? } */}
               <p>{data.role}</p>
             </button>
 
