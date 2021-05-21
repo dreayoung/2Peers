@@ -1,14 +1,16 @@
 import Axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import TwoPeersContext from '../context/TwoPeersContext';
 import EditMessage from './EditMessage';
 
 export default function Message({
-  text, isStudent, userId, id,
+  text, isStudent, userId, id, raterId,
 }) {
   const [optionsVisible, setOptions] = useState(false);
   const [name, setName] = useState('');
   const [messageRating, setMessageRating] = useState('');
+  const userInfo = useContext(TwoPeersContext).data.user.id;
 
   useEffect(() => {
     Axios.get(`/messages/${id}/rating`)
@@ -41,22 +43,23 @@ export default function Message({
   }
 
   const postRating = (idx) => {
-    const fetchOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        rating: idx,
-        // replace this with the userid stored in a cookie
-        id: 2,
-      }),
-    };
-    fetch(`/messages/${id}`, fetchOptions);
+    if (userId !== userInfo) {
+      const fetchOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          rating: idx,
+          id: raterId,
+        }),
+      };
+      fetch(`/messages/${id}`, fetchOptions);
+    }
   };
 
   return (
-    <div>
+    <div className={userInfo === userId ? 'flex justify-end' : ''}>
       <div className="message p-3 bg-green-100 ml-2 my-3 rounded overflow-hidden shadow-lg max-w-xs w-44">
         {
           isStudent ? (
@@ -76,7 +79,8 @@ export default function Message({
           </div>
         </div>
       </div>
-      {optionsVisible ? <EditMessage text={text} submission={setOptions} id={id} /> : null}
+      {(optionsVisible && userInfo === userId)
+        ? <EditMessage text={text} submission={setOptions} id={id} /> : null}
     </div>
   );
 }
@@ -85,6 +89,7 @@ Message.propTypes = {
   text: PropTypes.string,
   isStudent: PropTypes.bool,
   userId: PropTypes.number,
+  raterId: PropTypes.number,
   id: PropTypes.number,
 };
 
@@ -92,5 +97,6 @@ Message.defaultProps = {
   text: null,
   isStudent: true,
   userId: 1,
+  raterId: 1,
   id: null,
 };
