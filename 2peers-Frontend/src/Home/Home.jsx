@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../Reusable/Navbar';
 import Banner from '../Reusable/Banner';
 import Footer from '../Reusable/Footer';
 import Dashboard from '../Reusable/Dashboard';
@@ -11,7 +10,6 @@ const imageStyle = {
 export default function Home() {
   return (
     <div>
-      <Navbar route="/login" link="Login" />
       <Banner />
       <Dashboard />
       <section className="max-w-5xl px-6 py-16 mx-auto">

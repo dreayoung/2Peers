@@ -31,7 +31,7 @@ function NavBar() {
                 <Link to="/">
                   <p className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</p>
                 </Link>
-                {data.valid ? <Link to="/logout"><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Logout</p></Link> : <Link to="/login"><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Sign In</p></Link>}
+                {data.valid ? <Link to="/logout" onClick={() => { setData({}); }}><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Logout</p></Link> : <Link to="/login"><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Sign In</p></Link>}
               </div>
             </div>
           </div>

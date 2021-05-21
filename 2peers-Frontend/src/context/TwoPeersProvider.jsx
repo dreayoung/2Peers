@@ -17,7 +17,7 @@ function TwoPeersProvider({ children }) {
   const [userName, setName] = useState('');
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
-  const [checkbox, setCheck] = useState('');
+  const [checkbox, setCheck] = useState(false);
 
   const history = useHistory();
 
@@ -40,12 +40,17 @@ function TwoPeersProvider({ children }) {
       encryptedpassword: userPassword,
       checkbox,
     };
-    Axios.post('/signin', credentials);
-    if (checkbox === 'on') {
-      history.push(`/teachers/${data.user.id}`);
-    } else {
-      history.push(`/students/${data.user.id}`);
-    }
+    Axios.post('/signin', credentials)
+      .then((userSession) => {
+        setData(userSession.data);
+        if (userSession.data.checkbox === true) {
+          console.log(checkbox);
+          history.push(`/teachers/${userSession.data.user.id}`);
+        } else {
+          console.log(checkbox);
+          history.push(`/student/${userSession.data.user.id}`);
+        }
+      });
   }
 
   const values = {
