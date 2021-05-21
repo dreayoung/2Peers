@@ -1,5 +1,5 @@
 const { Classroom } = require('../models/Classroom');
-const Teacher = require('../models/Teacher');
+const { Teacher } = require('../models/Teacher');
 
 const createClass = async (req, res) => {
   const { code } = req.body;
