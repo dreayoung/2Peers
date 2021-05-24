@@ -47,6 +47,7 @@ router.post('/signin', async (req, res) => {
             userSess.checkbox = true;
             userSess.role = 'teacher';
             userSess.user = user;
+            userSess.session = req.session.id;
             res.status(200).json(userSess);
           } else {
             res.sendStatus(404);
