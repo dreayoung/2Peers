@@ -53,9 +53,9 @@ const getPeerRating = async (req, res) => {
 
 const patchUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email } = req.body;
+  const { name, email, profilepic } = req.body;
   try {
-    const user = await Student.patchUser(id, name, email);
+    const user = await Student.patchUser(id, name, email, profilepic);
     res.status(200).json(user);
   } catch {
     res.sendStatus(500);

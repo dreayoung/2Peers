@@ -39,28 +39,32 @@ export default function Profile({ isStudent }) {
         return (
           <EditStudent
             submission={
-              (newName, newEmail) => {
+              (newName, newEmail, newPic) => {
                 setName(newName);
                 setEmail(newEmail);
+                setPic(newPic);
                 setEdit((prev) => !prev);
               }
             }
             oldName={name}
             oldEmail={email}
+            oldPic={pic}
           />
         );
       }
       return (
         <EditTeacher
           submission={
-            (newName, newEmail) => {
+            (newName, newEmail, newPic) => {
               setName(newName);
               setEmail(newEmail);
+              setPic(newPic);
               setEdit((prev) => !prev);
             }
           }
           oldName={name}
           oldEmail={email}
+          oldPic={pic}
         />
       );
     }
