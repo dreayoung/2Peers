@@ -41,7 +41,7 @@ class Student {
 
   static patchUser(id, name, email, files) {
     debugger;
-    const queryText = 'UPDATE students SET name = $1, email = $2 profilepic = $3 WHERE id = 3 RETURNING *;';
+    const queryText = 'UPDATE students SET name = $1, email = $2 profilepic = $3 WHERE id = $4 RETURNING *;';
     return db.query(queryText, [name, email, files[0].preview, id]).then((results) => results.rows[0]);
   }
 
