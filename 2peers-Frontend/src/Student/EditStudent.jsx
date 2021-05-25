@@ -67,27 +67,17 @@ export default function EditStudent({
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-6">
-                    <div className="col-span-3 sm:col-span-2">
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                        Name
-                        <input type="text" id="name" value={name} onChange={({ target }) => { setName(target.value); }} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-green-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" />
-                      </label>
-                      <br />
-                      <input type="text" id="email" value={email} onChange={({ target }) => { setEmail(target.value); }} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-green-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" />
+                    <div onChange={(e) => { setEmail(e.target.value); }}>
+                      Inputs name go here
                     </div>
-                  </div>
-
-                  <div>
-                    <div className="mt-1 flex items-center">
-                      <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                        <img src="https://freepngimg.com/thumb/cartoon/3-2-cartoon-free-png-image.png" alt="img" />
-                      </span>
+                    <div onChange={(e) => { setName(e.target.value); }}>
+                      Input email go here
                     </div>
                   </div>
                 </div>
                 <div onChange={(e) => { setPic(e.target.value); }} />
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Save
                   </button>
                 </div>
