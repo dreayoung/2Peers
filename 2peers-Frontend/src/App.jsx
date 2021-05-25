@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import socketClient from 'socket.io-client';
+import Axios from 'axios';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Login from './data/Login';
 import Signup from './data/Signup';
@@ -9,15 +11,22 @@ import Teacher from './Teacher/Teacher';
 import Student from './Student/Student';
 import NavBar from './Reusable/Navbar';
 import Footer from './Reusable/Footer';
-import TwoPeersContext from './context/TwoPeersContext';
+// import TwoPeersContext from './context/TwoPeersContext';
 
 function App() {
-  const { data } = useContext(TwoPeersContext);
-  console.log(data);
+  const SERVER = Axios.get('/');
+  const socket = socketClient(SERVER);
+  console.log(socket);
+  socket.on('connection', () => {
+    console.log('I am connected with the beack-end');
+  });
+  // const { data } = useContext(TwoPeersContext);
+  // console.log(data);
   const history = useHistory();
   history.pathes = history.pathes
     ? [...history.pathes, history.location.pathname] : [history.location.pathname];
-  console.log(history);
+  // console.log(history);
+
   return (
     <div className="App">
       <NavBar route="/login" link="Login" />

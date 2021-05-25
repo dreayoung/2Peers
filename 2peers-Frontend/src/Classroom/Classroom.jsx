@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import TwoPeersContext from '../context/TwoPeersContext';
 import MakeMessage from './MakeMessage';
@@ -35,15 +35,15 @@ function Classroom() {
       });
   };
 
-  const checkMessages = () => {
-    getMessages();
-    setTimeout(checkMessages, 5000);
-  };
+  // const checkMessages = () => {
+  //   getMessages();
+  //   setTimeout(checkMessages, 5000);
+  // };
 
-  useEffect(async () => {
-    getMessages();
-    checkMessages();
-  }, [id]);
+  // useEffect(async () => {
+  //   getMessages();
+  //   checkMessages();
+  // }, [id]);
 
   return (
     <div className="classroom w-full">

@@ -17,7 +17,7 @@ class Student {
   }
 
   static addMessage(details, id) {
-    console.log('adding message');
+    // console.log('adding message');
     // destructuring req.body to get message rating,
     // can not destructure class since class is a keyword...
     const { message } = details;

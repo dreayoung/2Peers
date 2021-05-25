@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const {Server} = require('socket.io');
+const io = new Server(server)
 const PORT = process.env.PORT || 8000;
 
 const appRouter = require('./routes/appRouter');
@@ -14,12 +17,30 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+io.on('connection', (socket) => {
+  console.log('a user is connected');
+  socket.on('message', (msg) => {
+    console.log("msg:", msg)
+  })
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+});
+
+// io.on('connection', (socket) => {
+//   socket.on('message', (msg) => {
+//     console.log(msg)
+//   });
+// })
+
 app.use('/', appRouter);
 app.use('/student', studentRouter);
 app.use('/teachers', teacherRouter);
 app.use('/classrooms', classroomRouter);
 app.use('/messages', messageRouter);
-
-app.listen(PORT, () => {
+// app.listen(PORT, () => {
+//   console.log(`Server listening on ${PORT}`);
+// });
+server.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

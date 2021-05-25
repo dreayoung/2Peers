@@ -1,33 +1,42 @@
 import PropTypes from 'prop-types';
+import socketClient from 'socket.io-client';
+import Axios from 'axios';
 import { React, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 export default function MakeMessage({ update, userId, isStudent }) {
   const [message, setMessage] = useState('');
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        message,
-        class: id,
-      }),
-    };
+    // const options = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     message,
+    //     class: id,
+    //   }),
+    // };
+    let SERVER;
     if (isStudent) {
-      // make a post request
-      // Once the sign in logic is merged in, replace the 1
-      // in the fetch request below with the student id
-      // also do a check if it's a teacher to post to a different url
-      await fetch(`http://localhost:3000/student/${userId}/message`, options);
+      SERVER = Axios.get(`/student/${userId}/message`);
+      // await fetch(`http://localhost:3000/student/${userId}/message`, options);
     } else {
       console.log(userId);
-      await fetch(`http://localhost:3000/teachers/${userId}/message`, options);
+      SERVER = Axios.get(`teachers/${userId}/message`);
+      // await fetch(`http://localhost:3000/teachers/${userId}/message`, options);
+    }
+    const socket = socketClient(SERVER);
+    socket.on('connection', () => {
+      console.log('sending messages');
+    });
+
+    if (e.target.value) {
+      socket.emit('message', e.target.value);
+      e.target.value = '';
     }
 
     setMessage('');
