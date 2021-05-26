@@ -1,6 +1,13 @@
 const db = require('../database/db');
 
 class StudentMessageRatings {
+  static getMessageRating(messageid, studentid) {
+    const queryText = 'SELECT * FROM studentRatings WHERE messageid = $1 AND raterid = $2';
+    return db.query(
+      queryText, [Number(messageid), Number(studentid)],
+    ).then((results) => results.rows[0]);
+  }
+
   static postMessageRating(messageid, studentid, rating) {
     const queryText = 'INSERT INTO studentRatings (raterid, messageid, rating) VALUES ($1, $2, $3);';
     return db.query(queryText, [studentid, messageid, rating]);
@@ -18,7 +25,7 @@ class StudentMessageRatings {
   }
 
   static deleteMessageRating(studentid, messageid) {
-    const queryText = 'DELETE FROM studentratings WHERE studentid = $1 AND messageid = $2;';
+    const queryText = 'DELETE FROM studentratings WHERE raterid = $1 AND messageid = $2;';
     return db.query(queryText, [studentid, messageid]);
   }
 }
