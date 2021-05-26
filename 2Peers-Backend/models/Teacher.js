@@ -32,8 +32,8 @@ class Teacher {
   }
 
   static addMessage(teacherId, classId, message) {
-    const queryText = 'INSERT INTO teacherMessages (teacher, class, message, date) VALUES ($1, $2, $3, now());';
-    return db.query(queryText, [teacherId, classId, message]);
+    const queryText = 'INSERT INTO teacherMessages (teacher, class, message, date) VALUES ($1, $2, $3, now()) RETURNING *;';
+    return db.query(queryText, [teacherId, classId, message]).then((results) => results.rows[0]);
   }
 
   static patchMessage(messageid, message) {

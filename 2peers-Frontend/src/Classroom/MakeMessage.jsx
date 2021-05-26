@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { React, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function MakeMessage({ update, userId, isStudent }) {
+export default function MakeMessage({ userId, isStudent }) {
   const [message, setMessage] = useState('');
   const { id } = useParams();
 
@@ -15,37 +15,38 @@ export default function MakeMessage({ update, userId, isStudent }) {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify({
+      body: {
         message,
-        class: id,
-      }),
+        classId: id,
+      },
     };
     let SERVER;
     if (isStudent) {
       console.log(userId);
-      SERVER = Axios.get(`/student/${userId}/message`, options);
+      SERVER = Axios.post(`/student/${userId}/message`, options);
       // await fetch(`http://localhost:3000/student/${userId}/message`, options);
     } else {
       console.log(userId);
-      SERVER = Axios.get(`/teachers/${userId}/message`, options);
+      SERVER = Axios.post(`/teachers/${userId}/message`, options);
       // await fetch(`http://localhost:3000/teachers/${userId}/message`, options);
     }
     const socket = socketClient(SERVER);
-    socket.on('message', () => {
-      console.log('sending messages');
-      if (e.target.value) {
-        socket.emit('message', e.target.value);
+    if (message) {
+      socket.on('message', () => {
+        console.log('sending messages');
+        socket.send('message', message);
         e.target.value = '';
-      }
-    });
+      });
+    }
 
+    // console.log(message);
     // if (e.target.value) {
     //   socket.emit('message', e.target.value);
     //   e.target.value = '';
     // }
 
     setMessage('');
-    update();
+    // update();
   };
 
   return (
@@ -65,13 +66,13 @@ export default function MakeMessage({ update, userId, isStudent }) {
 }
 
 MakeMessage.propTypes = {
-  update: PropTypes.func,
+  // update: PropTypes.func,
   userId: PropTypes.number,
   isStudent: PropTypes.bool,
 };
 
 MakeMessage.defaultProps = {
-  update: null,
+  // update: null,
   userId: 1,
   isStudent: true,
 };

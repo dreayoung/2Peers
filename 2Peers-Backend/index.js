@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
   socket.on('message', (msg) => {
     console.log(msg)
   });
-  socket.send("msg");
+  socket.emit("msg");
 })
 
 app.use('/', appRouter);

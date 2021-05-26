@@ -1,5 +1,11 @@
 const { Classroom } = require('../models/Classroom');
 const { Teacher } = require('../models/Teacher');
+// const express = require('express');
+// const app = express();
+// const http = require('http');
+// const server = http.createServer(app);
+// const {Server} = require('socket.io');
+// const io = new Server(server)
 
 const createClass = async (req, res) => {
   const { code } = req.body;
@@ -45,18 +51,15 @@ const patchUser = async (req, res) => {
 
 const postMessage = async (req, res) => {
   const { id } = req.params;
-  const { message } = req.body;
-  const classId = req.body.class;
-  io.on('message', (socket) => {
-    socket.on('message', (msg) => {
-      console.log(msg)
-    });
-    socket.send('msg');
-  });
+  const createdMessage = req.body.body.message;
+  const classId = req.body.body.classId;
   try {
-    const newMessage = await Teacher.addMessage(id, classId, message);
+    const newMessage = await Teacher.addMessage(id, classId, createdMessage);
+    console.log(newMessage)
     res.status(200).json(newMessage);
+    debugger;
   } catch {
+    debugger;
     res.sendStatus(500);
   }
 };
