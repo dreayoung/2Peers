@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import socketClient from 'socket.io-client';
 import React, { useContext, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import TwoPeersContext from '../context/TwoPeersContext';
@@ -24,6 +25,8 @@ function Classroom() {
   const [classHeading, setClassHeading] = useState('');
   const [messages, setMessages] = useState([]);
 
+  const SERVER = Axios.get('/');
+  const socket = socketClient(SERVER);
   const getMessages = () => {
     Axios.get(`/classrooms/${id}`)
       .then(({ data }) => {
@@ -34,7 +37,11 @@ function Classroom() {
         setMessages(data);
       });
   };
-
+  if (info) {
+    socket.on('message', () => {
+      getMessages();
+    });
+  }
   // const checkMessages = () => {
   //   getMessages();
   //   setTimeout(checkMessages, 5000);

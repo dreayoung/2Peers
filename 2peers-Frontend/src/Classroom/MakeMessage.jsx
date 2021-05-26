@@ -34,7 +34,7 @@ export default function MakeMessage({ userId, isStudent }) {
     if (message) {
       socket.on('message', () => {
         console.log('sending messages');
-        socket.send('message', message);
+        socket.send(`message: ${message}`);
         e.target.value = '';
       });
     }
