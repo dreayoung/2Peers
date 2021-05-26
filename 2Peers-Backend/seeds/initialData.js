@@ -1,37 +1,37 @@
 const bcrypt = require('bcrypt');
 
 /** Must be exec'd synhronously for it to work */
-function makeHashedPass(plainTxtPassword) {
-  const saltRounds = 10;
-  const hash = bcrypt.hashSync(plainTxtPassword, saltRounds);
+async function makeHashedPass(plainTxtPassword) {
+  const hash = bcrypt.hashSync(plainTxtPassword, 10);
   return hash;
 }
 
-exports.seed = (knex) => {
+exports.seed = async (knex) => {
   const teacherPassword = 'math';
   const izzyPassword = 'Itzel';
   const jasPassword = 'Jason';
   const dreaPassword = 'Andrea';
   // Deletes ALL existing entries
-  return knex('subjects').del()
-    .then(() => knex('teachers').del())
-    .then(() => knex('students').del())
-    .then(() => knex('classes').del())
-    .then(() => knex('classmembers').del())
-    .then(() => knex('studentmessages').del())
-    .then(() => knex('teachermessages').del())
-    .then(() => knex('studentratings').del())
-    .then(() => knex('teacherratings').del())
-    .then(() => knex('subjects').insert([
-      {
-        name: 'math',
-      },
-    ]))
+  await knex('subjects').del();
+  await knex('teachers').del();
+  await knex('students').del();
+  await knex('classes').del();
+  await knex('classmembers').del();
+  await knex('studentmessages').del();
+  await knex('teachermessages').del();
+  await knex('studentratings').del();
+  await knex('teacherratings').del();
+
+  return knex('subjects').insert([
+    {
+      name: 'math',
+    },
+  ])
     .then(() => knex('teachers').insert([
       {
         name: 'math teacher',
         email: 'math@email.com',
-        profilepic: '#',
+        profilePic: '#',
         subject: 1,
         encryptedPassword: makeHashedPass(teacherPassword),
         archived: false,
@@ -41,21 +41,21 @@ exports.seed = (knex) => {
       {
         name: 'izzy',
         email: 'iz@email.com',
-        profilepic: '#',
+        profilePic: '#',
         encryptedPassword: makeHashedPass(izzyPassword),
         archived: false,
       },
       {
         name: 'jas',
         email: 'jas@email.com',
-        profilepic: '#',
+        profilePic: '#',
         encryptedPassword: makeHashedPass(jasPassword),
         archived: false,
       },
       {
         name: 'drea',
         email: 'drea@email.com',
-        profilepic: '#',
+        profilePic: '#',
         encryptedPassword: makeHashedPass(dreaPassword),
         archived: false,
       },
