@@ -15,6 +15,7 @@ import Footer from './Reusable/Footer';
 
 function App() {
   const SERVER = Axios.get('/');
+  console.log(socketClient());
   const socket = socketClient(SERVER);
   console.log(socket);
   socket.on('connection', () => {

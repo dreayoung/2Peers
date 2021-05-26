@@ -19,19 +19,21 @@ app.use(express.json());
 
 io.on('connection', (socket) => {
   console.log('a user is connected');
-  socket.on('message', (msg) => {
-    console.log("msg:", msg)
-  })
+  socket.send('USER CONNECTED')
+  // socket.on('message', (msg) => {
+  //   console.log("msg:", msg)
+  // })
   socket.on('disconnect', () => {
     console.log('user disconnected')
   })
 });
 
-// io.on('connection', (socket) => {
-//   socket.on('message', (msg) => {
-//     console.log(msg)
-//   });
-// })
+io.on('connection', (socket) => {
+  socket.on('message', (msg) => {
+    console.log(msg)
+  });
+  socket.send("msg");
+})
 
 app.use('/', appRouter);
 app.use('/student', studentRouter);

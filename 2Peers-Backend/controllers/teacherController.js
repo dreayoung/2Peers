@@ -47,10 +47,26 @@ const postMessage = async (req, res) => {
   const { id } = req.params;
   const { message } = req.body;
   const classId = req.body.class;
-  console.log('teacher posting message');
+  io.on('message', (socket) => {
+    socket.on('message', (msg) => {
+      console.log(msg)
+    });
+    socket.send('msg');
+  });
   try {
     const newMessage = await Teacher.addMessage(id, classId, message);
     res.status(200).json(newMessage);
+  } catch {
+    res.sendStatus(500);
+  }
+};
+
+const patchMessage = async (req, res) => {
+  const { id } = req.params;
+  const { message } = req.body;
+  try {
+    const patchedMessage = await Teacher.patchMessage(id, message);
+    res.status(200).json(patchedMessage);
   } catch {
     res.sendStatus(500);
   }
@@ -72,6 +88,7 @@ module.exports = {
   getClasses,
   getTeacherById,
   patchUser,
+  patchMessage,
   postMessage,
   deleteUser,
 };
