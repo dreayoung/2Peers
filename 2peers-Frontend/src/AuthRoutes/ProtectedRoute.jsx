@@ -2,12 +2,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-function ProtectedRoute({ component }) {
+function ProtectedRoute({ component, computedMatch }) {
   const Page = component;
   const validUser = localStorage.getItem('session-id');
 
   return validUser ? (
-    <Page />
+    <Page {...computedMatch} />
   ) : (
     <Redirect to="/login" />
   );

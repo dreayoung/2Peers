@@ -1,19 +1,20 @@
 import Axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import TwoPeersContext from '../context/TwoPeersContext';
+import React, { useEffect, useState } from 'react';
 import EditStudent from '../Student/EditStudent';
 import EditTeacher from '../Teacher/EditTeacher';
+import ArchiveT from '../Teacher/Archive';
+import ArchiveS from '../Student/Archive';
 
-export default function Profile({ isStudent }) {
-  const history = useHistory();
+export default function Profile({ isStudent, ...props }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pic, setPic] = useState('');
   const [edit, setEdit] = useState(false);
-  const userData = useContext(TwoPeersContext).setData;
-  const { id } = useParams();
+  const [archive, setArchive] = useState(false);
+
+  const { ...match } = props;
+  const { params: { id } } = match;
 
   useEffect(() => {
     if (isStudent) {
@@ -31,13 +32,14 @@ export default function Profile({ isStudent }) {
           setPic(data.profilepic);
         });
     }
-  }, []);
+  }, [id]);
 
   const returnEdit = () => {
     if (edit) {
       if (isStudent) {
         return (
           <EditStudent
+            {...match}
             submission={
               (newName, newEmail, newPic) => {
                 setName(newName);
@@ -54,6 +56,7 @@ export default function Profile({ isStudent }) {
       }
       return (
         <EditTeacher
+          {...match}
           submission={
             (newName, newEmail, newPic) => {
               setName(newName);
@@ -71,16 +74,21 @@ export default function Profile({ isStudent }) {
     return null;
   };
 
-  const deleteUser = async () => {
-    if (isStudent) {
-      await Axios.delete(`/student/${id}`);
-      userData({});
-    } else {
-      await Axios.delete(`/teachers/${id}`);
-      userData({});
+  const returnArchive = () => {
+    if (archive) {
+      if (isStudent) {
+        return (
+          <ArchiveS {...props} />
+        );
+      }
+      return (
+        <ArchiveT {...props} />
+      );
     }
-    history.push('/');
+    return null;
   };
+
+  console.log(pic);
 
   return (
     <div className="profile-container w-11/12 my-8 rounded shadow-lg flex justify-start">
@@ -98,10 +106,11 @@ export default function Profile({ isStudent }) {
         </div>
         <div className="user-btns py-5 flex w-3/12 justify-around">
           <button type="button" onClick={() => { setEdit((prev) => !prev); }} className="mx-3 bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-400 hover:border-transparent rounded">Edit</button>
-          <button onClick={deleteUser} type="button" className="mx-3 bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-400 hover:border-transparent rounded">Delete</button>
+          <button onClick={() => { setArchive((prev) => !prev); }} type="button" className="mx-3 bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-400 hover:border-transparent rounded">Delete</button>
         </div>
       </div>
       { returnEdit() }
+      { returnArchive() }
     </div>
   );
 }

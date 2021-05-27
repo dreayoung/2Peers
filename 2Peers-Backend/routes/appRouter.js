@@ -73,7 +73,7 @@ router.post('/signin', async (req, res) => {
       }
     }
   } catch (error) {
-    res.send({ message: 'total err' });
+    res.sendStatus(404);
   }
 });
 

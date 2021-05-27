@@ -5,6 +5,7 @@ import TwoPeersContext from '../context/TwoPeersContext';
 
 function NavBar() {
   const { data, Logout } = useContext(TwoPeersContext);
+  // console.log('navbar :', data);
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -28,9 +29,9 @@ function NavBar() {
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
                 <Link to="/">
-                  <p className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</p>
+                  <p className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</p>
                 </Link>
-                {data.valid ? <button onClick={Logout} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page" type="button">Logout</button> : <Link to="/login"><p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Sign In</p></Link>}
+                {data.valid ? <button onClick={Logout} className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page" type="button">Logout</button> : <Link to="/login"><p className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Sign In</p></Link>}
               </div>
             </div>
           </div>
@@ -40,10 +41,13 @@ function NavBar() {
 
             <div className="ml-3 relative">
               <div>
+                {/* <Link to={data.role === 'student' ? `/student/${data.user.id}`
+                : `/teachers/${data.user.id}`}> */}
                 <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span className="sr-only">Open user menu</span>
                   <img className="h-8 w-8 rounded-full" src={data.user ? data.user.profilepic : 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'} alt="user" />
                 </button>
+                {/* </Link> */}
               </div>
             </div>
           </div>

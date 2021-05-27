@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from '../Reusable/Banner';
+// import Banner from '../Reusable/Banner';
 import Footer from '../Reusable/Footer';
 // import Dashboard from '../Reusable/Dashboard';
 
@@ -10,7 +10,7 @@ import Footer from '../Reusable/Footer';
 export default function Home() {
   return (
     <div>
-      <Banner />
+      {/* <Banner /> */}
       {/* <Dashboard /> */}
       <section className="text-gray-700 body-font">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">

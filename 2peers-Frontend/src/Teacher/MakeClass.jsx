@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import TwoPeersContext from '../context/TwoPeersContext';
 
-export default function MakeClass({ isStudent, submission }) {
+export default function MakeClass({ isStudent, submission, ...props }) {
   const [code, setCode] = useState('');
-  const { id } = useParams();
+  const { ...match } = props;
+  const { params: { id } } = match;
 
   const {
     displaySwitch,

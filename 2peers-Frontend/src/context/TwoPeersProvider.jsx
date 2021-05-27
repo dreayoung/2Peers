@@ -16,6 +16,7 @@ function TwoPeersProvider({ children }) {
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
   const [checkbox, setCheck] = useState(false);
+  const [loginErr, setErrMessage] = useState('');
 
   const history = useHistory();
 
@@ -48,6 +49,9 @@ function TwoPeersProvider({ children }) {
           localStorage.setItem('session-id', userSession.data.session);
           history.push(`/student/${userSession.data.user.id}`);
         }
+      }).catch((err) => {
+        console.log(err.response);
+        setErrMessage(err.response.data);
       });
   }
 
@@ -76,6 +80,8 @@ function TwoPeersProvider({ children }) {
     SignUp,
     SignIn,
     Logout,
+    loginErr,
+    setErrMessage,
   };
   return (
     <TwoPeersContext.Provider value={values}>

@@ -13,7 +13,6 @@ import Teacher from './Teacher/Teacher';
 import Student from './Student/Student';
 import NavBar from './Reusable/Navbar';
 import ProtectedRoute from './AuthRoutes/ProtectedRoute';
-import Archive from './data/Archive';
 
 function App() {
   const history = useHistory();
@@ -27,7 +26,6 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/archive" component={Archive} />
         <ProtectedRoute exact path="/classrooms/:id" component={Classroom} />
         <ProtectedRoute exact path="/teachers/:id" component={Teacher} />
         <ProtectedRoute exact path="/student/:id" component={Student} />
