@@ -5,6 +5,7 @@ const { StudentMessageRatings } = require('../models/StudentMessageRatings');
 
 const addMessage = async (req, res) => {
   // student id to get the specific student that is sending the message
+  console.log(req.body.body);
   const studentId = req.params.id;
   const message = req.body.body.message;
   const classId = req.body.body.classId;

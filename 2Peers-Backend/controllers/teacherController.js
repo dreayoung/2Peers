@@ -57,9 +57,7 @@ const postMessage = async (req, res) => {
     const newMessage = await Teacher.addMessage(id, classId, createdMessage);
     console.log(newMessage)
     res.status(200).json(newMessage);
-    debugger;
   } catch {
-    debugger;
     res.sendStatus(500);
   }
 };

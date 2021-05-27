@@ -12,12 +12,12 @@ export default function Message({
   const [rated, setRated] = useState(false);
   const [messageRating, setMessageRating] = useState('');
   const userInfo = useContext(TwoPeersContext).data.user.id;
+  console.log(userInfo);
 
   const checkRating = async () => {
     const info = await Axios.post(`/student/${userInfo}`, {
       messageid: id,
     });
-    // console.log(info);
     return info;
   };
 

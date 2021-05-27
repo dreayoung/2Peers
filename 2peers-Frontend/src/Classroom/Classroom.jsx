@@ -1,6 +1,5 @@
 import Axios from 'axios';
-import socketClient from 'socket.io-client';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import TwoPeersContext from '../context/TwoPeersContext';
 import MakeMessage from './MakeMessage';
@@ -8,7 +7,6 @@ import Message from './Message';
 
 function Classroom() {
   const info = useContext(TwoPeersContext).data;
-  console.log(info);
   const infoCheck = () => {
     if (info.user) {
       if (info.checkbox) {
@@ -18,15 +16,11 @@ function Classroom() {
     }
     return '';
   };
-  // const userId = lastUrl.split('/')[2];
-  // const isStudent = (lastUrl.split('/')[1] === 'students');
-  // console.log(userId, isStudent);
+
   const { id } = useParams();
   const [classHeading, setClassHeading] = useState('');
   const [messages, setMessages] = useState([]);
 
-  const SERVER = Axios.get('/');
-  const socket = socketClient(SERVER);
   const getMessages = () => {
     Axios.get(`/classrooms/${id}`)
       .then(({ data }) => {
@@ -37,20 +31,10 @@ function Classroom() {
         setMessages(data);
       });
   };
-  if (info) {
-    socket.on('message', () => {
-      getMessages();
-    });
-  }
-  // const checkMessages = () => {
-  //   getMessages();
-  //   setTimeout(checkMessages, 5000);
-  // };
 
-  // useEffect(async () => {
-  //   getMessages();
-  //   checkMessages();
-  // }, [id]);
+  useEffect(async () => {
+    getMessages();
+  }, []);
 
   return (
     <div className="classroom w-full">

@@ -20,9 +20,6 @@ app.use(express.json());
 io.on('connection', (socket) => {
   console.log('a user is connected');
   socket.send('USER CONNECTED')
-  // socket.on('message', (msg) => {
-  //   console.log("msg:", msg)
-  // })
   socket.on('disconnect', () => {
     console.log('user disconnected')
   })
@@ -30,9 +27,11 @@ io.on('connection', (socket) => {
 
 io.on('connection', (socket) => {
   socket.on('message', (msg) => {
-    console.log(msg)
+    console.log(msg);
   });
-  socket.emit("msg");
+  socket.emit("msg", (msg)=> {
+    console.log(msg);
+  });
 })
 
 app.use('/', appRouter);
@@ -40,9 +39,7 @@ app.use('/student', studentRouter);
 app.use('/teachers', teacherRouter);
 app.use('/classrooms', classroomRouter);
 app.use('/messages', messageRouter);
-// app.listen(PORT, () => {
-//   console.log(`Server listening on ${PORT}`);
-// });
+
 server.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

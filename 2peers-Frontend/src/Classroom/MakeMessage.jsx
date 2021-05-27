@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { React, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function MakeMessage({ userId, isStudent }) {
+export default function MakeMessage({ userId, isStudent, update }) {
   const [message, setMessage] = useState('');
   const { id } = useParams();
 
@@ -24,11 +24,9 @@ export default function MakeMessage({ userId, isStudent }) {
     if (isStudent) {
       console.log(userId);
       SERVER = Axios.post(`/student/${userId}/message`, options);
-      // await fetch(`http://localhost:3000/student/${userId}/message`, options);
     } else {
       console.log(userId);
       SERVER = Axios.post(`/teachers/${userId}/message`, options);
-      // await fetch(`http://localhost:3000/teachers/${userId}/message`, options);
     }
     const socket = socketClient(SERVER);
     if (message) {
@@ -36,17 +34,11 @@ export default function MakeMessage({ userId, isStudent }) {
         console.log('sending messages');
         socket.send(`message: ${message}`);
         e.target.value = '';
+        update();
       });
     }
 
-    // console.log(message);
-    // if (e.target.value) {
-    //   socket.emit('message', e.target.value);
-    //   e.target.value = '';
-    // }
-
     setMessage('');
-    // update();
   };
 
   return (
@@ -66,13 +58,13 @@ export default function MakeMessage({ userId, isStudent }) {
 }
 
 MakeMessage.propTypes = {
-  // update: PropTypes.func,
+  update: PropTypes.func,
   userId: PropTypes.number,
   isStudent: PropTypes.bool,
 };
 
 MakeMessage.defaultProps = {
-  // update: null,
+  update: null,
   userId: 1,
   isStudent: true,
 };
