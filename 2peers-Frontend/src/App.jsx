@@ -1,7 +1,7 @@
 import React from 'react';
 import socketClient from 'socket.io-client';
 import Axios from 'axios';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from './data/Login';
 import Signup from './data/Signup';
 import Page404 from './data/Page404';
@@ -11,7 +11,6 @@ import Teacher from './Teacher/Teacher';
 import Student from './Student/Student';
 import NavBar from './Reusable/Navbar';
 import Footer from './Reusable/Footer';
-// import TwoPeersContext from './context/TwoPeersContext';
 
 function App() {
   const SERVER = Axios.get('/');
@@ -20,12 +19,6 @@ function App() {
   socket.on('connection', () => {
     console.log('I am connected with the beack-end');
   });
-  // const { data } = useContext(TwoPeersContext);
-  // console.log(data);
-  const history = useHistory();
-  history.pathes = history.pathes
-    ? [...history.pathes, history.location.pathname] : [history.location.pathname];
-  // console.log(history);
 
   return (
     <div className="App">

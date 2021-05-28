@@ -1,15 +1,22 @@
-// const app = require('express')();
-// const http = require('http').createServer(app);
-// const PORT = 8000;
-// const io = require('socket.io')(http);
+const express = require('express');
+const cors = require('cors');
 
-// http.listen(PORT, () => {
-//     console.log(`listening on *:${PORT}`);
-// });
+const app = express();
 
-// io.on('connection', (socket) => {
-//     console.log('new client connected');
-//     // with emit we can communicate with the front end through 
-//     // our newly established connection
-//     socket.emit('connection', null);
-// });
+const appRouter = require('./routes/appRouter');
+const studentRouter = require('./routes/studentRouter');
+const teacherRouter = require('./routes/teacherRouter');
+const classroomRouter = require('./routes/classroomRouter');
+const messageRouter = require('./routes/messageRouter');
+
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use('/', appRouter);
+app.use('/student', studentRouter);
+app.use('/teachers', teacherRouter);
+app.use('/classrooms', classroomRouter);
+app.use('/messages', messageRouter);
+
+module.exports = app;
