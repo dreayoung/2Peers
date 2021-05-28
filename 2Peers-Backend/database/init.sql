@@ -33,7 +33,7 @@ CREATE TABLE students (
     id SERIAL PRIMARY KEY,
     name TEXT, 
     email TEXT, 
-    profile Text, 
+    profilepic Text, 
     encryptedpassword TEXT,
     archived BOOLEAN
 );
@@ -94,9 +94,9 @@ CREATE TABLE teacherRatings (
 );
 
 INSERT INTO subjects (name) VALUES ('math');
-INSERT INTO teachers (name, email, profile, subject, encryptedpassword, archived) VALUES ('ms', 'ms@email.com', '#', 1, 'oneWord', FALSE);
-INSERT INTO students (name, email, profile, encryptedpassword, archived) VALUES ('izzy', 'iz@email.com', '#', 'words', FALSE);
-INSERT INTO students (name, email, profile, encryptedpassword, archived) VALUES ('jas', 'jas@email.com', '#', 'jas', FALSE);
+INSERT INTO teachers (name, email, profilepic, subject, encryptedpassword, archived) VALUES ('ms', 'ms@email.com', '#', 1, 'oneWord', FALSE);
+INSERT INTO students (name, email, profilepic, encryptedpassword, archived) VALUES ('izzy', 'iz@email.com', '#', 'words', FALSE);
+INSERT INTO students (name, email, profilepic, encryptedpassword, archived) VALUES ('jas', 'jas@email.com', '#', 'jas', FALSE);
 INSERT INTO classes (classCode, teacher_id) VALUES ('abc123', 1);
 INSERT INTO classMembers (student, selfRating, peerRating, class_id) VALUES (1, 5, 3, 1);
 INSERT INTO studentMessages (student, class, message, date) VALUES (1, 1, 'Some Message', now());
