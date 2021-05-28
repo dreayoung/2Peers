@@ -9,12 +9,14 @@ import ArchiveS from '../Student/Archive';
 export default function Profile({ isStudent, ...props }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [pic, setPic] = useState('');
+  const [pic, setPic] = useState([]);
   const [edit, setEdit] = useState(false);
   const [archive, setArchive] = useState(false);
 
   const { ...match } = props;
   const { params: { id } } = match;
+
+  console.log('profile pic:', pic);
 
   useEffect(() => {
     if (isStudent) {
@@ -27,6 +29,7 @@ export default function Profile({ isStudent, ...props }) {
     } else {
       Axios.get(`/teachers/${id}`)
         .then(({ data }) => {
+          console.log('data :', data);
           setName(data.name);
           setEmail(data.email);
           setPic(data.profilepic);
@@ -48,6 +51,7 @@ export default function Profile({ isStudent, ...props }) {
                 setEdit((prev) => !prev);
               }
             }
+            cancel={() => { setEdit((prev) => !prev); }}
             oldName={name}
             oldEmail={email}
             oldPic={pic}
@@ -65,6 +69,7 @@ export default function Profile({ isStudent, ...props }) {
               setEdit((prev) => !prev);
             }
           }
+          cancel={() => { setEdit((prev) => !prev); }}
           oldName={name}
           oldEmail={email}
           oldPic={pic}
@@ -78,22 +83,29 @@ export default function Profile({ isStudent, ...props }) {
     if (archive) {
       if (isStudent) {
         return (
-          <ArchiveS {...props} />
+          <ArchiveS {...props} cancel={() => { setArchive((prev) => !prev); }} />
         );
       }
       return (
-        <ArchiveT {...props} />
+        <ArchiveT {...props} cancel={() => { setArchive((prev) => !prev); }} />
       );
     }
     return null;
   };
 
-  console.log(pic);
+  // useEffect(() => () => {
+  //   // Make sure to revoke the data uris to avoid memory leaks
+  //   pic.forEach((file) => URL.revokeObjectURL(file.preview));
+  // }, [pic]);
+
+  // const dropZOnepic = pic.map((file) => (
+  //   <img key={file.path} src={file.preview} alt="Profile" />
+  // ));
 
   return (
     <div className="profile-container w-11/12 my-8 rounded shadow-lg flex justify-start">
-      <div className="prof-img h-40 w-1/4">
-        <img src={pic} alt="Profile" />
+      <div className="prof-img h-40 w-1/4 p-8">
+        <img src={pic} alt="profile pic" />
       </div>
       <div className="w-9/12">
         <div className="flex flex-col">

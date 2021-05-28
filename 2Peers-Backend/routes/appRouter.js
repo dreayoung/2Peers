@@ -4,6 +4,7 @@ const { Student } = require('../models/Student');
 const { Teacher } = require('../models/Teacher');
 
 const router = express.Router();
+
 let userSess = { user: '', valid: '', role: '', session: '' };
 
 router.post('/signup', async (req, res) => {
@@ -37,7 +38,7 @@ router.post('/signup', async (req, res) => {
 router.post('/signin', async (req, res) => {
   const { encryptedpassword } = req.body;
   try {
-    if (req.body.checkbox === true) {
+    if (req.body.checkbox) {
       const user = await Teacher.getTeacher(req.body);
       if (user) {
         await bcrypt.compare(encryptedpassword, user.encryptedpassword, (err, results) => {

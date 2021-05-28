@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import { React, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-export default function MakeMessage({ update, userId, isStudent }) {
+export default function MakeMessage({
+  update, userId, isStudent, ...props
+}) {
   const [message, setMessage] = useState('');
-  const { id } = useParams();
+
+  const { ...match } = props;
+  const { params: { id } } = match;
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ export default function MakeMessage({ update, userId, isStudent }) {
       // also do a check if it's a teacher to post to a different url
       await fetch(`http://localhost:3000/student/${userId}/message`, options);
     } else {
-      console.log(userId);
+      // console.log(userId);
       await fetch(`http://localhost:3000/teachers/${userId}/message`, options);
     }
 

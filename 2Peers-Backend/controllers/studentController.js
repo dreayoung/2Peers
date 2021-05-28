@@ -2,6 +2,7 @@ const { Student } = require('../models/Student');
 const { Classroom } = require('../models/Classroom');
 const { StudentMessages } = require('../models/StudentMessages');
 const { StudentMessageRatings } = require('../models/StudentMessageRatings');
+const { TeacherMessageRating } = require('../models/TeacherMessageRatings');
 
 const addMessage = async (req, res) => {
   // student id to get the specific student that is sending the message
@@ -38,7 +39,8 @@ const getPeerRating = async (req, res) => {
     const calcTotalAvg = async (messages) => {
       const ratings = messages.map(async (msg) => {
         const rating = await StudentMessageRatings.getAvgMessageRatings(msg.id);
-        return Number(rating.avg);
+        const teacherRating = await TeacherMessageRating.getAvgMessageRatings(msg.id);
+        return ((Number(rating.avg) * 0.25) + (Number(teacherRating.avg) * 0.75));
       });
       const resolvedRatings = await Promise.all(ratings);
       const total = resolvedRatings.reduce((acc, cur) => acc + cur, 0) / messages.length;
@@ -52,11 +54,9 @@ const getPeerRating = async (req, res) => {
 };
 
 const patchUser = async (req, res) => {
-  debugger;
   const { id } = req.params;
   const { name, email, files } = req.body;
   try {
-    debugger;
     const user = await Student.patchUser(id, name, email, files);
     res.status(200).json(user);
   } catch {
@@ -107,9 +107,9 @@ const getMessageRating = async (req, res) => {
 
 const patchMessage = async (req, res) => {
   const { id } = req.params;
-  const { message } = req.body;
+  const { messageid } = req.body;
   try {
-    const updatedMessage = await StudentMessages.patchMessage(id, message);
+    const updatedMessage = await StudentMessages.patchMessage(id, messageid);
     res.status(200).json(updatedMessage);
   } catch {
     res.sendStatus(500);
@@ -133,7 +133,8 @@ const getAvgMessageRatings = async (req, res) => {
   const { id } = req.params;
   try {
     const rating = await StudentMessageRatings.getAvgMessageRatings(id);
-    res.status(200).json(Number(rating.avg));
+    const teacherRatings = await TeacherMessageRating.getAvgMessageRatings(id);
+    res.status(200).json((Number(rating.avg) * 0.25) + (Number(teacherRatings.avg) * 0.75));
   } catch {
     res.sendStatus(500);
   }
@@ -144,7 +145,7 @@ const patchMessageRating = async (req, res) => {
   const newRating = req.body.rating;
   // replacec studentid with session later
   const studentid = req.body.id;
-  console.log(messageid, newRating, studentid);
+  // console.log(messageid, newRating, studentid);
   try {
     const rating = await StudentMessageRatings.patchMessageRating(
       messageid, studentid, newRating,

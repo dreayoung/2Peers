@@ -27,14 +27,14 @@ class Teacher {
   }
 
   static patchUser(id, name, email, profilepic) {
-    debugger;
+    // debugger;
     const queryText = 'UPDATE teachers SET name = $1, email = $2, profilepic = $3 WHERE id = $4 RETURNING *;';
-    return db.query(queryText, [name, email, profilepic[0].path, id]).then((results) => results.rows[0]);
+    return db.query(queryText, [name, email, profilepic[0].preview, id]).then((results) => results.rows[0]);
   }
 
   static addMessage(teacherId, classId, message) {
-    const queryText = 'INSERT INTO teacherMessages (teacher, class, message, date) VALUES ($1, $2, $3, now());';
-    return db.query(queryText, [teacherId, classId, message]);
+    const queryText = 'INSERT INTO teacherMessages (teacher, class, message, date) VALUES ($1, $2, $3, now()) RETURNING *;';
+    return db.query(queryText, [teacherId, classId, message]).then((results) => results.rows[0]);
   }
 
   static patchMessage(messageid, message) {

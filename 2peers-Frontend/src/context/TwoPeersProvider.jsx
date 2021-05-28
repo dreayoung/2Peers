@@ -6,6 +6,7 @@ import TwoPeersContext from './TwoPeersContext';
 function TwoPeersProvider({ children }) {
   const [toggleModal, displaySwitch] = useState(null);
   const [data, setData] = useState({});
+  const [files, setFile] = useState([]);
 
   useEffect(() => {
     Axios.get('/api')
@@ -50,7 +51,6 @@ function TwoPeersProvider({ children }) {
           history.push(`/student/${userSession.data.user.id}`);
         }
       }).catch((err) => {
-        console.log(err.response);
         setErrMessage(err.response.data);
       });
   }
@@ -82,6 +82,8 @@ function TwoPeersProvider({ children }) {
     Logout,
     loginErr,
     setErrMessage,
+    files,
+    setFile,
   };
   return (
     <TwoPeersContext.Provider value={values}>
