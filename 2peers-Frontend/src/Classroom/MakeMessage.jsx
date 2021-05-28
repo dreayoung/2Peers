@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import { React, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-export default function MakeMessage({ update, userId, isStudent }) {
+export default function MakeMessage({
+  update, userId, isStudent, ...props
+}) {
   const [message, setMessage] = useState('');
-  const { id } = useParams();
+
+  const { ...match } = props;
+  const { params: { id } } = match;
 
   const sendMessage = async (e) => {
     e.preventDefault();

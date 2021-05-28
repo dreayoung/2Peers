@@ -84,6 +84,7 @@ function Classroom({ ...props }) {
           userId={info.user ? info.user.id : 0}
           isStudent={info ? !(info.checkbox) : true}
           update={getMessages}
+          {...props}
         />
       </div>
     </div>

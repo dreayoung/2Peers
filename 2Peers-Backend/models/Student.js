@@ -2,7 +2,7 @@ const db = require('../database/db');
 
 class Student {
   static signUp(body) {
-    const queryStudent = 'INSERT INTO students (name, email, profilepic, encryptedpassword, archived) VALUES ($1, $2, $3, $4, $5)';
+    const queryStudent = 'INSERT INTO students (name, email, prolfilepic, encryptedpassword, archived) VALUES ($1, $2, $3, $4, $5)';
     const studentPic = 'https://www.pngitem.com/pimgs/m/77-778738_transparent-indian-elephant-png-cartoon-elephant-side-view.png';
     const archived = false;
 
@@ -11,13 +11,12 @@ class Student {
     );
   }
 
-  static getStudent(body){
-    const queryText = 'SELECT * FROM students WHERE email = $1'
-    return db.query(queryText, [body.email]).then(results => results.rows[0]);
+  static getStudent(body) {
+    const queryText = 'SELECT * FROM students WHERE email = $1';
+    return db.query(queryText, [body.email]).then((results) => results.rows[0]);
   }
 
   static addMessage(details, id) {
-    console.log('adding message');
     // destructuring req.body to get message rating,
     // can not destructure class since class is a keyword...
     const { message } = details;

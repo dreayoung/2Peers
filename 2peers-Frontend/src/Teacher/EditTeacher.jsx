@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
 import Axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import TwoPeersContext from '../context/TwoPeersContext';
 
 export default function EditTeacher({
   submission, oldName, oldEmail, cancel, ...match
 }) {
   const [name, setName] = useState(oldName);
   const [email, setEmail] = useState(oldEmail);
-  const [files, setFile] = useState([]);
   const { params: { id } } = match;
+
+  const { files, setFile } = useContext(TwoPeersContext);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',

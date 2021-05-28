@@ -16,6 +16,8 @@ export default function Profile({ isStudent, ...props }) {
   const { ...match } = props;
   const { params: { id } } = match;
 
+  console.log('profile pic:', pic);
+
   useEffect(() => {
     if (isStudent) {
       Axios.get(`/student/${id}`)
@@ -27,6 +29,7 @@ export default function Profile({ isStudent, ...props }) {
     } else {
       Axios.get(`/teachers/${id}`)
         .then(({ data }) => {
+          console.log('data :', data);
           setName(data.name);
           setEmail(data.email);
           setPic(data.profilepic);
@@ -102,7 +105,7 @@ export default function Profile({ isStudent, ...props }) {
   return (
     <div className="profile-container w-11/12 my-8 rounded shadow-lg flex justify-start">
       <div className="prof-img h-40 w-1/4 p-8">
-        <img src={pic} alt="Profile" />
+        <img src={pic} alt="profile pic" />
       </div>
       <div className="w-9/12">
         <div className="flex flex-col">
