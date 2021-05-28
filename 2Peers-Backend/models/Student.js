@@ -39,9 +39,9 @@ class Student {
     return db.query(queryText, [id, classid]).then((results) => results.rows[0]);
   }
 
-  static patchUser(id, name, email, files) {
-    const queryText = 'UPDATE students SET name = $1, email = $2 profilepic = $3 WHERE id = $4 RETURNING *;';
-    return db.query(queryText, [name, email, files[0].preview, id]).then((results) => results.rows[0]);
+  static patchUser(id, name, email, profilepic) {
+    const queryText = 'UPDATE students SET name = $1, email = $2, profilepic = $3 WHERE id = $4 RETURNING *;';
+    return db.query(queryText, [name, email, profilepic[0].preview, id]).then((results) => results.rows[0]);
   }
 
   static deleteStudent(id) {

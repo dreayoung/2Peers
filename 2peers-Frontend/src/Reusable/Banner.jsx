@@ -14,10 +14,10 @@ function Banner() {
             </span>
             <p className="ml-3 font-medium text-white truncate">
               <span className="md:hidden">
-                This is the banner closed.
+                This is the banner mobile view.
               </span>
               <span className="hidden md:inline">
-                Hello I am the banner :) !!
+                Hello I am the banner... idk what else to say...
               </span>
             </p>
           </div>

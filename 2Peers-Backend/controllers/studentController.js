@@ -52,11 +52,9 @@ const getPeerRating = async (req, res) => {
 };
 
 const patchUser = async (req, res) => {
-  debugger;
   const { id } = req.params;
   const { name, email, files } = req.body;
   try {
-    debugger;
     const user = await Student.patchUser(id, name, email, files);
     res.status(200).json(user);
   } catch {

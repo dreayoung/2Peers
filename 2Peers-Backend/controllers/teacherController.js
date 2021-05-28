@@ -35,7 +35,7 @@ const getTeacherById = async (req, res) => {
 const patchUser = async (req, res) => {
   const { id } = req.params;
   const { name, email, files } = req.body;
-  debugger;
+  // debugger;
   try {
     const user = await Teacher.patchUser(id, name, email, files);
     res.status(200).json(user);

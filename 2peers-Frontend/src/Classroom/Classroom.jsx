@@ -7,7 +7,7 @@ import Message from './Message';
 
 function Classroom({ ...props }) {
   const info = useContext(TwoPeersContext).data;
-  console.log(info);
+  // console.log(info);
   const infoCheck = () => {
     if (info.user) {
       if (info.checkbox) {

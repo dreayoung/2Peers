@@ -26,7 +26,7 @@ export default function MakeMessage({ update, userId, isStudent }) {
       // also do a check if it's a teacher to post to a different url
       await fetch(`http://localhost:3000/student/${userId}/message`, options);
     } else {
-      console.log(userId);
+      // console.log(userId);
       await fetch(`http://localhost:3000/teachers/${userId}/message`, options);
     }
 
