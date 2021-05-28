@@ -26,9 +26,10 @@ class Teacher {
     return db.query(queryText, [id]).then((results) => results.rows[0]);
   }
 
-  static patchUser(id, name, email) {
-    const queryText = 'UPDATE teachers SET name = $1, email = $2 WHERE id = $3 RETURNING *;';
-    return db.query(queryText, [name, email, id]).then((results) => results.rows[0]);
+  static patchUser(id, name, email, profilepic) {
+    // debugger;
+    const queryText = 'UPDATE teachers SET name = $1, email = $2, profilepic = $3 WHERE id = $4 RETURNING *;';
+    return db.query(queryText, [name, email, profilepic[0].preview, id]).then((results) => results.rows[0]);
   }
 
   static addMessage(teacherId, classId, message) {

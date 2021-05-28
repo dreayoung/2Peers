@@ -6,6 +6,7 @@ import TwoPeersContext from './TwoPeersContext';
 function TwoPeersProvider({ children }) {
   const [toggleModal, displaySwitch] = useState(null);
   const [data, setData] = useState({});
+  const [files, setFile] = useState([]);
 
   useEffect(() => {
     Axios.get('/api')
@@ -16,6 +17,7 @@ function TwoPeersProvider({ children }) {
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
   const [checkbox, setCheck] = useState(false);
+  const [loginErr, setErrMessage] = useState('');
 
   const history = useHistory();
 
@@ -42,18 +44,29 @@ function TwoPeersProvider({ children }) {
       .then((userSession) => {
         setData(userSession.data);
         if (userSession.data.checkbox === true) {
-          // console.log(checkbox);
+          localStorage.setItem('session-id', userSession.data.session);
           history.push(`/teachers/${userSession.data.user.id}`);
         } else {
-          // console.log(checkbox);
+          localStorage.setItem('session-id', userSession.data.session);
           history.push(`/student/${userSession.data.user.id}`);
         }
+      }).catch((err) => {
+        setErrMessage(err.response.data);
+      });
+  }
+
+  function Logout() {
+    Axios.get('/logout')
+      .then((userSession) => {
+        localStorage.clear();
+        setData(userSession.data);
+        history.push('/login');
       });
   }
 
   const values = {
-    displaySwitch,
     toggleModal,
+    displaySwitch,
     data,
     setData,
     userName,
@@ -66,8 +79,12 @@ function TwoPeersProvider({ children }) {
     setCheck,
     SignUp,
     SignIn,
+    Logout,
+    loginErr,
+    setErrMessage,
+    files,
+    setFile,
   };
-
   return (
     <TwoPeersContext.Provider value={values}>
       { children }

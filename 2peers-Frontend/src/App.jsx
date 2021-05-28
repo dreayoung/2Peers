@@ -1,5 +1,9 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  BrowserRouter,
+} from 'react-router-dom';
 import Login from './data/Login';
 import Signup from './data/Signup';
 import Page404 from './data/Page404';
@@ -8,6 +12,7 @@ import Home from './Home/Home';
 import Teacher from './Teacher/Teacher';
 import Student from './Student/Student';
 import NavBar from './Reusable/Navbar';
+import ProtectedRoute from './AuthRoutes/ProtectedRoute';
 import Footer from './Reusable/Footer';
 import TwoPeersProvider from './context/TwoPeersProvider';
 
@@ -20,10 +25,10 @@ function App() {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/classrooms/:id" component={Classroom} />
             <Route exact path="/" component={Home} />
-            <Route exact path="/teachers/:id" component={Teacher} />
-            <Route exact path="/student/:id" component={Student} />
+            <ProtectedRoute exact path="/classrooms/:id" component={Classroom} />
+            <ProtectedRoute exact path="/teachers/:id" component={Teacher} />
+            <ProtectedRoute exact path="/student/:id" component={Student} />
             <Route path="/" component={Page404} />
           </Switch>
           <Footer />

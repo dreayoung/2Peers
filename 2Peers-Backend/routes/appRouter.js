@@ -5,7 +5,7 @@ const { Teacher } = require('../models/Teacher');
 
 const router = express.Router();
 
-const userSess = { user: '', valid: '', role: '' };
+let userSess = { user: '', valid: '', role: '', session: '' };
 
 router.post('/signup', async (req, res) => {
   try {
@@ -43,10 +43,12 @@ router.post('/signin', async (req, res) => {
       if (user) {
         await bcrypt.compare(encryptedpassword, user.encryptedpassword, (err, results) => {
           if (results) {
+            req.session.user = user;
             userSess.valid = true;
             userSess.checkbox = true;
             userSess.role = 'teacher';
             userSess.user = user;
+            userSess.session = req.session.id;
             res.status(200).json(userSess);
           } else {
             res.sendStatus(404);
@@ -58,10 +60,12 @@ router.post('/signin', async (req, res) => {
       if (user) {
         await bcrypt.compare(encryptedpassword, user.encryptedpassword, (err, results) => {
           if (results) {
+            req.session.user = user;
             userSess.valid = true;
             userSess.checkbox = false;
             userSess.role = 'student';
             userSess.user = user;
+            userSess.session = req.session.id;
             res.status(200).json(userSess);
           } else {
             res.sendStatus(404);
@@ -70,8 +74,14 @@ router.post('/signin', async (req, res) => {
       }
     }
   } catch (error) {
-    res.send({ message: 'total err' });
+    res.sendStatus(404);
   }
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy()
+    userSess = { user: '', valid: '', role: '', session: '' };
+    res.status(200).json(userSess);
 });
 
 router.get('/api', (req, res) => {

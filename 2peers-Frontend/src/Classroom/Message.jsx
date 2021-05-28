@@ -24,6 +24,7 @@ export default function Message({
     const info = await Axios.post(`/teachers/${userInfo}/exists`, {
       messageid: id,
     });
+    // console.log(info);
     return info;
   };
 

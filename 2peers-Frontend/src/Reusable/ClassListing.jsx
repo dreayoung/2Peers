@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import EditSelfrating from './EditSelfrating';
 
-export default function ClassListing({ classroom, isStudent }) {
+export default function ClassListing({ classroom, isStudent, ...props }) {
   const [className, setClassname] = useState('');
   const [selfRating, setSelfRating] = useState(0);
   const [peerRating, setPeerRating] = useState(0);
   const [editVisible, setEditVisible] = useState(false);
-  const { id } = useParams();
+  const { ...match } = props;
+  const { params: { id } } = match;
 
   useEffect(() => {
     Axios.get(`/classrooms/${classroom}`)
