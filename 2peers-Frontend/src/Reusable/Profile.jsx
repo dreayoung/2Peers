@@ -21,14 +21,14 @@ export default function Profile({ isStudent }) {
         .then(({ data }) => {
           setName(data.name);
           setEmail(data.email);
-          setPic(data.prolfilepic);
+          setPic(data.profilepic);
         });
     } else {
       Axios.get(`/teachers/${id}`)
         .then(({ data }) => {
           setName(data.name);
           setEmail(data.email);
-          setPic(data.prolfilepic);
+          setPic(data.profilepic);
         });
     }
   }, []);
