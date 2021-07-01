@@ -23,10 +23,6 @@ export default function Home() {
           <div>
             <img src="https://static.vecteezy.com/system/resources/previews/001/187/438/original/heart-png.png" alt="books stack" className="w-40 h-40 animate-pulse" />
           </div>
-          {/* <div className="portrait">
-            <img className="portrait__img animate-spin" src="https://www.pngkey.com/png/full/512-5127105_steven-bucks-sunglasses-260315wd-de-steven-universe-steven.png" alt="Me" />
-            <img className="portrait__img" src="https://www.pngkit.com/png/full/115-1156327_steven-universe-steven-quartz-universe-su-gem-steven.png" alt="Me" />
-          </div> */}
         </div>
       </section>
 
@@ -41,7 +37,6 @@ export default function Home() {
             </p>
             <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6" />
             <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">Nelson Mandela</h2>
-            {/* <p className="text-gray-500">Senior Product Designer</p> */}
           </div>
         </div>
       </section>

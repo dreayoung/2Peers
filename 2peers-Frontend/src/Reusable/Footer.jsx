@@ -25,16 +25,6 @@ function Footer() {
       </div>
     </footer>
   );
-
-  /* <a href="https://www.khanacademy.org/signup" rel="noreferrer" target="_blank" classNameName="opacity-60">
-              <img src="../khanacademylogo.png" alt="khan academy" />
-            </a>
-            <a href="https://www.freecodecamp.org/" rel="noreferrer" target="_blank" classNameName="opacity-60">
-              <img src="../free-code-camp-logo.png" alt="free code camp" />
-            </a>
-            <a href="https://quizlet.com/" rel="noreferrer" target="_blank" classNameName="opacity-60">
-              <img src="../quizlet-logo-png.png" alt="quizlet" />
-            </a> */
 }
 
 export default Footer;

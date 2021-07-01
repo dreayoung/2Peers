@@ -11,7 +11,7 @@ import Classroom from './Classroom/Classroom';
 import Home from './Home/Home';
 import Teacher from './Teacher/Teacher';
 import Student from './Student/Student';
-import NavBar from './Reusable/Navbar';
+import NavBar from './Reusable/Navbar.tsx';
 import ProtectedRoute from './AuthRoutes/ProtectedRoute';
 import TwoPeersProvider from './context/TwoPeersProvider';
 
