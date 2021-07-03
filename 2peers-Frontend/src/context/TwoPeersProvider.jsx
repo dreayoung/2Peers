@@ -4,6 +4,7 @@ import Axios from 'axios';
 import TwoPeersContext from './TwoPeersContext';
 
 function TwoPeersProvider({ children }) {
+  console.log(children);
   const [toggleModal, displaySwitch] = useState(null);
   const [data, setData] = useState({});
   const [files, setFile] = useState([]);

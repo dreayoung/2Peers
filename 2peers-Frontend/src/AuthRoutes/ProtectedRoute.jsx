@@ -2,7 +2,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-function ProtectedRoute({ component, computedMatch }) {
+function ProtectedRoute({
+  component, computedMatch, exact, path,
+}) {
+  console.log(exact, path);
   const Page = component;
   const validUser = localStorage.getItem('session-id');
 

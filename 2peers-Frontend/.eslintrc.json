@@ -5,9 +5,10 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb-typescript"
     ],
     "parserOptions": {
+        "project": ["./tsconfig.json"],
         "ecmaFeatures": {
             "jsx": false
         },
@@ -20,6 +21,7 @@
     "rules": {
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/prop-types": [2, { "ignore": ["children"] }],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }

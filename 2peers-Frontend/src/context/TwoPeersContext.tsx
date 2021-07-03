@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const TwoPeersContext = createContext();
+const TwoPeersContext = createContext<{} | null>(null);
 
 export default TwoPeersContext;
