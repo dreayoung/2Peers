@@ -1,11 +1,17 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
+import express from 'express';
+import bcrypt from 'bcrypt';
 const { Student } = require('../models/Student');
 const { Teacher } = require('../models/Teacher');
 
 const router = express.Router();
 
-let userSess = { user: '', valid: '', role: '', session: '' };
+let userSess = { 
+  currentUser: '',
+  valid: false,
+  role: '',
+  session: '',
+  checkbox: false,
+};
 
 router.post('/signup', async (req, res) => {
   try {
@@ -45,11 +51,11 @@ router.post('/signin', async (req, res) => {
       if (user) {
         await bcrypt.compare(encryptedpassword, user.encryptedpassword, (err, results) => {
           if (results) {
-            req.session.user = user;
+            req.session = user;
             userSess.valid = true;
             userSess.checkbox = true;
             userSess.role = 'teacher';
-            userSess.user = user;
+            userSess.currentUser = user;
             userSess.session = req.session.id;
             res.status(200).json(userSess);
           } else {
@@ -62,11 +68,11 @@ router.post('/signin', async (req, res) => {
       if (user) {
         await bcrypt.compare(encryptedpassword, user.encryptedpassword, (err, results) => {
           if (results) {
-            req.session.user = user;
+            req.session = user;
             userSess.valid = true;
             userSess.checkbox = false;
             userSess.role = 'student';
-            userSess.user = user;
+            userSess.currentUser = user;
             userSess.session = req.session.id;
             res.status(200).json(userSess);
           } else {
@@ -81,8 +87,8 @@ router.post('/signin', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    req.session.destroy()
-    userSess = { user: '', valid: '', role: '', session: '' };
+    req.session.destroy;
+    userSess = { currentUser: '', valid: false, role: '', session: '', checkbox: false, };
     res.status(200).json(userSess);
 });
 

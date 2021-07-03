@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const session = require('express-session')
+import express from 'express';
+import cors from 'cors';
+import session from 'express-session';
 const app = express();
 
 const appRouter = require('./routes/appRouter');
@@ -26,4 +26,4 @@ app.use('/teachers', teacherRouter);
 app.use('/classrooms', classroomRouter);
 app.use('/messages', messageRouter);
 
-module.exports = app;
+export default app;
